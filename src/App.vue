@@ -1,7 +1,8 @@
 <script>
 
 import axios from 'axios';
-import store from './data/store';
+import {store} from './data/store';
+import ProjectCard from './components/ProjectCard.vue';
 
 export default {
 
@@ -13,11 +14,15 @@ export default {
     }
   },
 
+  components: {
+    ProjectCard
+  },
+
   methods:{
     getApi(){
       axios.get(store.apiUrl + 'projects')
         .then(results =>{
-          console.log(results.data);
+          store.projects = results.data.data;
         })
     }
   },
@@ -32,6 +37,7 @@ export default {
 
 <template>
  <h1>{{ message }}</h1>
+ <ProjectCard></ProjectCard>
 </template>
 
 <style lang="scss">
